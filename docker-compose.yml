@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  mysql:
+    container_name: db_alura_flix_container
+    image: mysql:8.0.31
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: alura_flix
+    volumes:
+      - mysql_data:/data/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  mysql_data:
+    driver: local
