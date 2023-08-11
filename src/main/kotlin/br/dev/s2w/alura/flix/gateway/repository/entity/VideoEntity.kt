@@ -17,5 +17,5 @@ data class VideoEntity(
 
     var descricao: String,
 
-    var url: String
+    var url: String,
 )
