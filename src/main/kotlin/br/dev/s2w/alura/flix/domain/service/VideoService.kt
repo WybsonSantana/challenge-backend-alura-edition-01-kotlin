@@ -4,4 +4,5 @@ import br.dev.s2w.alura.flix.domain.model.Video
 
 interface VideoService {
     fun retrieve(): List<Video>
+    fun retriveOne(id: Long): Video
 }

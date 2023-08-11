@@ -1,6 +1,7 @@
 package br.dev.s2w.alura.flix.infrastructure.configuration
 
 import br.dev.s2w.alura.flix.domain.gateway.FindAllVideos
+import br.dev.s2w.alura.flix.domain.gateway.FindVideoById
 import br.dev.s2w.alura.flix.domain.service.VideoService
 import br.dev.s2w.alura.flix.domain.service.impl.VideoServiceImpl
 import br.dev.s2w.alura.flix.domain.usecase.FindAllVideosUsecase
@@ -11,8 +12,8 @@ import org.springframework.context.annotation.Configuration
 class FindAllVideosConfiguration {
 
     @Bean
-    fun findAllVideosService(findAllVideos: FindAllVideos): VideoService {
-        return VideoServiceImpl(findAllVideos)
+    fun findAllVideosService(findAllVideos: FindAllVideos, findVideoById: FindVideoById): VideoService {
+        return VideoServiceImpl(findAllVideos, findVideoById)
     }
 
     @Bean
