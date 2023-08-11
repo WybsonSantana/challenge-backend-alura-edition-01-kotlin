@@ -1,4 +1,4 @@
-package br.dev.s2w.alura.flix.gateway.entity
+package br.dev.s2w.alura.flix.gateway.repository.entity
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
