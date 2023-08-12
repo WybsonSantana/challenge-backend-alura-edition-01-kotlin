@@ -7,4 +7,5 @@ interface VideoService {
     fun retriveOne(id: Long): Video
     fun saveOne(video: Video): Video
     fun modifyOne(id: Long, video: Video): Video
+    fun removeOne(id: Long)
 }

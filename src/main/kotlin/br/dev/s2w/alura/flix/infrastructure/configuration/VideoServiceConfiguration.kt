@@ -1,9 +1,6 @@
 package br.dev.s2w.alura.flix.infrastructure.configuration
 
-import br.dev.s2w.alura.flix.domain.gateway.FindAllVideos
-import br.dev.s2w.alura.flix.domain.gateway.FindVideoById
-import br.dev.s2w.alura.flix.domain.gateway.InsertVideo
-import br.dev.s2w.alura.flix.domain.gateway.UpdateVideo
+import br.dev.s2w.alura.flix.domain.gateway.*
 import br.dev.s2w.alura.flix.domain.service.VideoService
 import br.dev.s2w.alura.flix.domain.service.impl.VideoServiceImpl
 import org.springframework.context.annotation.Bean
@@ -17,8 +14,9 @@ class VideoServiceConfiguration {
         findAllVideos: FindAllVideos,
         findVideoById: FindVideoById,
         insertVideo: InsertVideo,
-        updateVideo: UpdateVideo
+        updateVideo: UpdateVideo,
+        deleteVideoById: DeleteVideoById
     ): VideoService {
-        return VideoServiceImpl(findAllVideos, findVideoById, insertVideo, updateVideo)
+        return VideoServiceImpl(findAllVideos, findVideoById, insertVideo, updateVideo, deleteVideoById)
     }
 }

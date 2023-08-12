@@ -10,4 +10,5 @@ interface VideoAPI {
     fun findVideoById(id: Long): ResponseEntity <VideoResponse>
     fun insertVideo(videoRequest: VideoRequest, uriBuilder: UriComponentsBuilder): ResponseEntity<VideoResponse>
     fun updateVideo(id: Long, videoRequest: VideoRequest): ResponseEntity<VideoResponse>
+    fun deleteVideoById(id: Long): ResponseEntity<Unit>
 }
