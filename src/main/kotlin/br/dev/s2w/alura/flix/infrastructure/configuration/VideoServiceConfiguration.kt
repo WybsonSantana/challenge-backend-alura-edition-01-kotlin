@@ -6,15 +6,19 @@ import br.dev.s2w.alura.flix.domain.gateway.InsertVideo
 import br.dev.s2w.alura.flix.domain.gateway.UpdateVideo
 import br.dev.s2w.alura.flix.domain.service.VideoService
 import br.dev.s2w.alura.flix.domain.service.impl.VideoServiceImpl
-import br.dev.s2w.alura.flix.domain.usecase.FindAllVideosUsecase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class FindAllVideosConfiguration {
+class VideoServiceConfiguration {
 
     @Bean
-    fun findAllVideosUsecase(videoService: VideoService): FindAllVideosUsecase {
-        return FindAllVideosUsecase(videoService)
+    fun videoService(
+        findAllVideos: FindAllVideos,
+        findVideoById: FindVideoById,
+        insertVideo: InsertVideo,
+        updateVideo: UpdateVideo
+    ): VideoService {
+        return VideoServiceImpl(findAllVideos, findVideoById, insertVideo, updateVideo)
     }
 }

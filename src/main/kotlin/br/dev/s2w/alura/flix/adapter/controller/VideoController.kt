@@ -9,6 +9,7 @@ import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.domain.usecase.FindAllVideosUsecase
 import br.dev.s2w.alura.flix.domain.usecase.FindVideoByIdUsecase
 import br.dev.s2w.alura.flix.domain.usecase.InsertVideoUsecase
+import br.dev.s2w.alura.flix.domain.usecase.UpdateVideoUsecase
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -19,7 +20,8 @@ import java.net.URI
 class VideoController(
     private val findAllVideosUsecase: FindAllVideosUsecase,
     private val findVideoByIdUsecase: FindVideoByIdUsecase,
-    private val insertVideoUsecase: InsertVideoUsecase
+    private val insertVideoUsecase: InsertVideoUsecase,
+    private val updateVideoUsecase: UpdateVideoUsecase
 ) : VideoAPI {
 
     @GetMapping
@@ -41,6 +43,16 @@ class VideoController(
         insertVideoUsecase.execute(videoRequest.toVideo()).also {
             val uri = buildVideoUri(it, uriBuilder)
             return ResponseEntity.created(uri).body(it.toVideoResponse())
+        }
+    }
+
+    @PutMapping("/{id}")
+    override fun updateVideo(
+        @PathVariable id: Long,
+        @RequestBody videoRequest: VideoRequest
+    ): ResponseEntity<VideoResponse> {
+        updateVideoUsecase.execute(id, videoRequest.toVideo()).also {
+            return ResponseEntity.ok(it.toVideoResponse())
         }
     }
 
