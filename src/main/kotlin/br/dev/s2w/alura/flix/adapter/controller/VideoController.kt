@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import java.net.URI
+import javax.validation.Valid
 
 @RestController
 @RequestMapping(VIDEO_API_V1_MAPPING)
@@ -37,7 +38,7 @@ class VideoController(
 
     @PostMapping
     override fun insertVideo(
-        @RequestBody videoRequest: VideoRequest,
+        @RequestBody @Valid videoRequest: VideoRequest,
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<VideoResponse> {
         insertVideoUsecase.execute(videoRequest.toVideo()).also {
@@ -49,7 +50,7 @@ class VideoController(
     @PutMapping("/{id}")
     override fun updateVideo(
         @PathVariable id: Long,
-        @RequestBody videoRequest: VideoRequest
+        @RequestBody @Valid videoRequest: VideoRequest
     ): ResponseEntity<VideoResponse> {
         updateVideoUsecase.execute(id, videoRequest.toVideo()).also {
             return ResponseEntity.ok(it.toVideoResponse())
