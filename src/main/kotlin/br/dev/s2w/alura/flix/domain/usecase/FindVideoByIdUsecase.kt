@@ -8,6 +8,6 @@ class FindVideoByIdUsecase(
 ) {
 
     fun execute(id: Long): Video {
-        return videoService.retriveOne(id)
+        return videoService.retriveOneBy(id)
     }
 }

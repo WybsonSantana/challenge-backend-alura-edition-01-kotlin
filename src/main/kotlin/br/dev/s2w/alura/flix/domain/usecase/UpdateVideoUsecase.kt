@@ -8,6 +8,6 @@ class UpdateVideoUsecase(
 ) {
 
     fun execute(id: Long, video: Video): Video {
-        return videoService.modifyOne(id, video)
+        return videoService.modifyOneBy(id, video)
     }
 }

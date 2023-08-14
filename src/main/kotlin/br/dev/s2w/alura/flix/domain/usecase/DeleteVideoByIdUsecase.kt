@@ -7,6 +7,6 @@ class DeleteVideoByIdUsecase(
 ) {
 
     fun execute(id: Long) {
-        videoService.removeOne(id)
+        videoService.removeOneBy(id)
     }
 }

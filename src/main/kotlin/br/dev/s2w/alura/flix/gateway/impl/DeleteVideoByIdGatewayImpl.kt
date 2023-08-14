@@ -1,19 +1,18 @@
-package br.dev.s2w.alura.flix.gateway
+package br.dev.s2w.alura.flix.gateway.impl
 
 import br.dev.s2w.alura.flix.domain.exception.VideoNotFoundException
-import br.dev.s2w.alura.flix.domain.gateway.DeleteVideoById
+import br.dev.s2w.alura.flix.domain.gateway.DeleteVideoByIdGateway
 import br.dev.s2w.alura.flix.gateway.repository.VideoRepository
-import br.dev.s2w.alura.flix.infrastructure.utility.Constants
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_NOT_FOUND_EXCEPTION_MESSAGE
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.stereotype.Component
 
 @Component
-class DeleteVideoByIdImpl(
+class DeleteVideoByIdGatewayImpl(
     private val videoRepository: VideoRepository
-) : DeleteVideoById {
+) : DeleteVideoByIdGateway {
 
-    override fun removeOne(id: Long) {
+    override fun removeOneBy(id: Long) {
         try {
             videoRepository.deleteById(id)
         } catch (e: EmptyResultDataAccessException) {

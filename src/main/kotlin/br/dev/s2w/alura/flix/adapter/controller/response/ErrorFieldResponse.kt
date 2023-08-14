@@ -7,10 +7,15 @@ import java.time.LocalDateTime
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class ErrorFieldResponse(
     val timeStamp: LocalDateTime = LocalDateTime.now(),
+
     val status: Int,
+
     val error: String,
+
     val message: String,
+
     val validationError: ValidationError,
+
     val path: String
 )
 

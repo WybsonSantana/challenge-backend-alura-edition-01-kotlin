@@ -1,7 +1,7 @@
-package br.dev.s2w.alura.flix.gateway
+package br.dev.s2w.alura.flix.gateway.impl
 
 import br.dev.s2w.alura.flix.domain.exception.VideoNotFoundException
-import br.dev.s2w.alura.flix.domain.gateway.UpdateVideo
+import br.dev.s2w.alura.flix.domain.gateway.UpdateVideoByIdGateway
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.gateway.repository.VideoRepository
 import br.dev.s2w.alura.flix.gateway.repository.entity.VideoEntity
@@ -11,11 +11,11 @@ import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
 import org.springframework.stereotype.Component
 
 @Component
-class UpdateVideoImpl(
+class UpdateVideoByIdGatewayImpl(
     private val videoRepository: VideoRepository
-) : UpdateVideo {
+) : UpdateVideoByIdGateway {
 
-    override fun modifyOne(id: Long, video: Video): Video {
+    override fun modifyOneBy(id: Long, video: Video): Video {
         val referencedVideo = try {
             videoRepository.getReferenceById(id)
         } catch (e: JpaObjectRetrievalFailureException) {

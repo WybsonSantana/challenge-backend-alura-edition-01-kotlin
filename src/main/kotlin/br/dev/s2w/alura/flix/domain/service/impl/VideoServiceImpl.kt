@@ -3,33 +3,32 @@ package br.dev.s2w.alura.flix.domain.service.impl
 import br.dev.s2w.alura.flix.domain.gateway.*
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.domain.service.VideoService
-import br.dev.s2w.alura.flix.domain.usecase.DeleteVideoByIdUsecase
 
 class VideoServiceImpl(
-    private val findAllVideos: FindAllVideos,
-    private val findVideoById: FindVideoById,
-    private val insertVideo: InsertVideo,
-    private val updateVideo: UpdateVideo,
-    private val deleteVideoById: DeleteVideoById
+    private val findAllVideosGateway: FindAllVideosGateway,
+    private val findVideoByIdGateway: FindVideoByIdGateway,
+    private val insertVideoGateway: InsertVideoGateway,
+    private val updateVideoByIdGateway: UpdateVideoByIdGateway,
+    private val deleteVideoByIdGateway: DeleteVideoByIdGateway
 ) : VideoService {
 
     override fun retrieve(): List<Video> {
-        return findAllVideos.fetch()
+        return findAllVideosGateway.fetch()
     }
 
-    override fun retriveOne(id: Long): Video {
-        return findVideoById.fetchOne(id)
+    override fun retriveOneBy(id: Long): Video {
+        return findVideoByIdGateway.fetchOneBy(id)
     }
 
     override fun saveOne(video: Video): Video {
-        return insertVideo.saveOne(video)
+        return insertVideoGateway.saveOne(video)
     }
 
-    override fun modifyOne(id: Long, video: Video): Video {
-        return updateVideo.modifyOne(id, video)
+    override fun modifyOneBy(id: Long, video: Video): Video {
+        return updateVideoByIdGateway.modifyOneBy(id, video)
     }
 
-    override fun removeOne(id: Long) {
-        deleteVideoById.removeOne(id)
+    override fun removeOneBy(id: Long) {
+        deleteVideoByIdGateway.removeOneBy(id)
     }
 }
