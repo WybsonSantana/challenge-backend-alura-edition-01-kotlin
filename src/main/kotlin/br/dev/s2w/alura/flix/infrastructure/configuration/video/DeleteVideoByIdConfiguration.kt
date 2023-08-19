@@ -1,4 +1,4 @@
-package br.dev.s2w.alura.flix.infrastructure.configuration
+package br.dev.s2w.alura.flix.infrastructure.configuration.video
 
 import br.dev.s2w.alura.flix.domain.service.VideoService
 import br.dev.s2w.alura.flix.domain.usecase.DeleteVideoByIdUsecase
