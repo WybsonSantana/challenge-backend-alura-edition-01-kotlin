@@ -1,7 +1,7 @@
-package br.dev.s2w.alura.flix.gateway.impl
+package br.dev.s2w.alura.flix.gateway.impl.video
 
 import br.dev.s2w.alura.flix.domain.exception.VideoNotFoundException
-import br.dev.s2w.alura.flix.domain.gateway.UpdateVideoByIdGateway
+import br.dev.s2w.alura.flix.domain.gateway.video.UpdateVideoByIdGateway
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.gateway.repository.VideoRepository
 import br.dev.s2w.alura.flix.gateway.repository.entity.VideoEntity

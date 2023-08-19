@@ -7,7 +7,7 @@ import br.dev.s2w.alura.flix.adapter.controller.request.VideoRequest
 import br.dev.s2w.alura.flix.adapter.controller.response.VideoResponse
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.domain.usecase.*
-import br.dev.s2w.alura.flix.infrastructure.utility.Constants
+import br.dev.s2w.alura.flix.domain.usecase.video.*
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_API_V1_MAPPING
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

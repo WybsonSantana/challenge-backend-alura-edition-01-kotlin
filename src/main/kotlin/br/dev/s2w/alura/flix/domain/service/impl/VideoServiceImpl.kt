@@ -1,6 +1,6 @@
 package br.dev.s2w.alura.flix.domain.service.impl
 
-import br.dev.s2w.alura.flix.domain.gateway.*
+import br.dev.s2w.alura.flix.domain.gateway.video.*
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.domain.service.VideoService
 

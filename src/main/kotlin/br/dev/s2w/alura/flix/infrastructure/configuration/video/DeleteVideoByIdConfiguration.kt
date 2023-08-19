@@ -1,7 +1,7 @@
 package br.dev.s2w.alura.flix.infrastructure.configuration.video
 
 import br.dev.s2w.alura.flix.domain.service.VideoService
-import br.dev.s2w.alura.flix.domain.usecase.DeleteVideoByIdUsecase
+import br.dev.s2w.alura.flix.domain.usecase.video.DeleteVideoByIdUsecase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

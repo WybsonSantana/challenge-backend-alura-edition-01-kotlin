@@ -1,4 +1,4 @@
-package br.dev.s2w.alura.flix.domain.usecase
+package br.dev.s2w.alura.flix.domain.usecase.categoria
 
 import br.dev.s2w.alura.flix.domain.model.Categoria
 import br.dev.s2w.alura.flix.domain.service.CategoriaService
