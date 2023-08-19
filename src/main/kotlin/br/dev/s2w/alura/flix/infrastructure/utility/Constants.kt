@@ -3,6 +3,7 @@ package br.dev.s2w.alura.flix.infrastructure.utility
 object Constants {
 
     // API Mapping
+    const val CATEGORIA_API_V1_MAPPING = "/api/v1/categorias"
     const val VIDEO_API_V1_MAPPING = "/api/v1/videos"
 
     // Error Messages
