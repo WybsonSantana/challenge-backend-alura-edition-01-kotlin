@@ -5,11 +5,11 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class VideoResponse(
-    var id: Long,
+    val id: Long,
 
-    var titulo: String,
+    val titulo: String,
 
-    var descricao: String,
+    val descricao: String,
 
-    var url: String
+    val url: String
 )

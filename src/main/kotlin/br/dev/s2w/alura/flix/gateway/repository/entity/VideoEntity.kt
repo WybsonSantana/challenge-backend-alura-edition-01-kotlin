@@ -11,11 +11,11 @@ import javax.persistence.Table
 data class VideoEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
+    val id: Long? = null,
 
-    var titulo: String,
+    val titulo: String,
 
-    var descricao: String,
+    val descricao: String,
 
-    var url: String,
+    val url: String,
 )

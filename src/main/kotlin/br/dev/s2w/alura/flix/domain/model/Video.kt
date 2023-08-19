@@ -1,11 +1,11 @@
 package br.dev.s2w.alura.flix.domain.model
 
 data class Video(
-    var id: Long,
+    val id: Long? = null,
 
-    var titulo: String,
+    val titulo: String,
 
-    var descricao: String,
+    val descricao: String,
 
-    var url: String
+    val url: String
 )
