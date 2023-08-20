@@ -11,4 +11,6 @@ interface CategoriaAPI {
     fun findCategoriaById(id: Long): ResponseEntity<CategoriaResponse>
 
     fun insertCategoria(categoriaRequest: CategoriaRequest, uriBuilder: UriComponentsBuilder): ResponseEntity<CategoriaResponse>
+
+    fun updateCategoria(id: Long, categoriaRequest: CategoriaRequest): ResponseEntity<CategoriaResponse>
 }

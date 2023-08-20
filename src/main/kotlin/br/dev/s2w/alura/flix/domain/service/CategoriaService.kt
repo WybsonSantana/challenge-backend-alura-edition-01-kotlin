@@ -8,4 +8,6 @@ interface CategoriaService {
     fun retrieveOneBy(id: Long): Categoria
 
     fun saveOne(categoria: Categoria): Categoria
+
+    fun modifyOneBy(id: Long, categoria: Categoria): Categoria
 }
