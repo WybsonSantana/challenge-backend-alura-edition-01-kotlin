@@ -6,4 +6,6 @@ interface CategoriaService {
     fun retrieve(): List<Categoria>
 
     fun retrieveOneBy(id: Long): Categoria
+
+    fun saveOne(categoria: Categoria): Categoria
 }
