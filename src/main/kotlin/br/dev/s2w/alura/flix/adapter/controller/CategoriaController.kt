@@ -7,13 +7,11 @@ import br.dev.s2w.alura.flix.adapter.controller.request.CategoriaRequest
 import br.dev.s2w.alura.flix.adapter.controller.response.CategoriaResponse
 import br.dev.s2w.alura.flix.domain.model.Categoria
 import br.dev.s2w.alura.flix.domain.model.Video
-import br.dev.s2w.alura.flix.domain.usecase.categoria.FindAllCategoriasUsecase
-import br.dev.s2w.alura.flix.domain.usecase.categoria.FindCategoriaByIdUsecase
-import br.dev.s2w.alura.flix.domain.usecase.categoria.InsertCategoriaUsecase
-import br.dev.s2w.alura.flix.domain.usecase.categoria.UpdateCategoriaUsecase
+import br.dev.s2w.alura.flix.domain.usecase.categoria.*
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.CATEGORIA_API_V1_MAPPING
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -31,7 +29,8 @@ class CategoriaController(
     private val findAllCategoriasUsecase: FindAllCategoriasUsecase,
     private val findCategoriaByIdUsecase: FindCategoriaByIdUsecase,
     private val insertCategoriaUsecase: InsertCategoriaUsecase,
-    private val updateCategoriaUsecase: UpdateCategoriaUsecase
+    private val updateCategoriaUsecase: UpdateCategoriaUsecase,
+    private val deleteCategoriaByIdUsecase: DeleteCategoriaByIdUsecase
 ) : CategoriaAPI {
 
     @GetMapping
@@ -63,6 +62,13 @@ class CategoriaController(
     ): ResponseEntity<CategoriaResponse> {
         updateCategoriaUsecase.execute(id, categoriaRequest.toCategoria()).also {
             return ResponseEntity.ok(it.toCategoriaResponse())
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    override fun deleteCategoriaById(@PathVariable id: Long): ResponseEntity<Unit> {
+        deleteCategoriaByIdUsecase.execute(id).also {
+            return ResponseEntity.noContent().build()
         }
     }
 

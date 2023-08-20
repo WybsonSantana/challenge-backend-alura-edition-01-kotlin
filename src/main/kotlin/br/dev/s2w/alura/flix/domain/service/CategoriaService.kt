@@ -10,4 +10,6 @@ interface CategoriaService {
     fun saveOne(categoria: Categoria): Categoria
 
     fun modifyOneBy(id: Long, categoria: Categoria): Categoria
+
+    fun removeOneBy(id: Long)
 }
