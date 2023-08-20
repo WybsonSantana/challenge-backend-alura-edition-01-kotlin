@@ -1,15 +1,15 @@
 package br.dev.s2w.alura.flix.infrastructure.configuration.video
 
 import br.dev.s2w.alura.flix.domain.service.VideoService
-import br.dev.s2w.alura.flix.domain.usecase.video.UpdateVideoUsecase
+import br.dev.s2w.alura.flix.domain.usecase.video.UpdateVideoByIdUsecase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class UpdateVideoConfiguration {
+class UpdateVideoByIdConfiguration {
 
     @Bean
-    fun updateVideo(videoService: VideoService): UpdateVideoUsecase {
-        return UpdateVideoUsecase(videoService)
+    fun updateVideoUsecase(videoService: VideoService): UpdateVideoByIdUsecase {
+        return UpdateVideoByIdUsecase(videoService)
     }
 }

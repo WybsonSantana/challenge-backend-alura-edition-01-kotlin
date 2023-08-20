@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration
 class InsertVideoConfiguration {
 
     @Bean
-    fun insertVideo(videoService: VideoService): InsertVideoUsecase {
+    fun insertVideoUsecase(videoService: VideoService): InsertVideoUsecase {
         return InsertVideoUsecase(videoService)
     }
 }

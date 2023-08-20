@@ -6,7 +6,6 @@ import br.dev.s2w.alura.flix.adapter.controller.mapper.CategoriaMapper.toCategor
 import br.dev.s2w.alura.flix.adapter.controller.request.CategoriaRequest
 import br.dev.s2w.alura.flix.adapter.controller.response.CategoriaResponse
 import br.dev.s2w.alura.flix.domain.model.Categoria
-import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.domain.usecase.categoria.*
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.CATEGORIA_API_V1_MAPPING
@@ -29,7 +28,7 @@ class CategoriaController(
     private val findAllCategoriasUsecase: FindAllCategoriasUsecase,
     private val findCategoriaByIdUsecase: FindCategoriaByIdUsecase,
     private val insertCategoriaUsecase: InsertCategoriaUsecase,
-    private val updateCategoriaUsecase: UpdateCategoriaUsecase,
+    private val updateCategoriaByIdUsecase: UpdateCategoriaByIdUsecase,
     private val deleteCategoriaByIdUsecase: DeleteCategoriaByIdUsecase
 ) : CategoriaAPI {
 
@@ -60,7 +59,7 @@ class CategoriaController(
         @PathVariable id: Long,
         @RequestBody @Valid categoriaRequest: CategoriaRequest
     ): ResponseEntity<CategoriaResponse> {
-        updateCategoriaUsecase.execute(id, categoriaRequest.toCategoria()).also {
+        updateCategoriaByIdUsecase.execute(id, categoriaRequest.toCategoria()).also {
             return ResponseEntity.ok(it.toCategoriaResponse())
         }
     }

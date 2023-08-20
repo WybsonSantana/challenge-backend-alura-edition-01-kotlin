@@ -21,7 +21,7 @@ class VideoController(
     private val findAllVideosUsecase: FindAllVideosUsecase,
     private val findVideoByIdUsecase: FindVideoByIdUsecase,
     private val insertVideoUsecase: InsertVideoUsecase,
-    private val updateVideoUsecase: UpdateVideoUsecase,
+    private val updateVideoByIdUsecase: UpdateVideoByIdUsecase,
     private val deleteVideoByIdUsecase: DeleteVideoByIdUsecase
 ) : VideoAPI {
 
@@ -52,7 +52,7 @@ class VideoController(
         @PathVariable id: Long,
         @RequestBody @Valid videoRequest: VideoRequest
     ): ResponseEntity<VideoResponse> {
-        updateVideoUsecase.execute(id, videoRequest.toVideo()).also {
+        updateVideoByIdUsecase.execute(id, videoRequest.toVideo()).also {
             return ResponseEntity.ok(it.toVideoResponse())
         }
     }
