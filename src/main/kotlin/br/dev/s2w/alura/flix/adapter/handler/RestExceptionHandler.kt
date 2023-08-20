@@ -3,6 +3,7 @@ package br.dev.s2w.alura.flix.adapter.handler
 import br.dev.s2w.alura.flix.adapter.controller.response.ErrorFieldResponse
 import br.dev.s2w.alura.flix.adapter.controller.response.ErrorResponse
 import br.dev.s2w.alura.flix.adapter.controller.response.ValidationError
+import br.dev.s2w.alura.flix.domain.exception.CategoriaNotFoundException
 import br.dev.s2w.alura.flix.domain.exception.VideoNotFoundException
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.ARGUMENT_NOT_VALID_MESSAGE
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.HTTP_MESSAGE_NOT_READABLE
@@ -17,6 +18,20 @@ import javax.servlet.http.HttpServletRequest
 
 @RestControllerAdvice
 class RestExceptionHandler {
+
+    @ExceptionHandler(CategoriaNotFoundException::class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun handleCategoriaNotFoundException(
+        exception: CategoriaNotFoundException,
+        request: HttpServletRequest
+    ): ErrorResponse {
+        return ErrorResponse(
+            status = HttpStatus.NOT_FOUND.value(),
+            error = HttpStatus.NOT_FOUND.name,
+            message = exception.message!!,
+            path = request.servletPath
+        )
+    }
 
     @ExceptionHandler(VideoNotFoundException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
