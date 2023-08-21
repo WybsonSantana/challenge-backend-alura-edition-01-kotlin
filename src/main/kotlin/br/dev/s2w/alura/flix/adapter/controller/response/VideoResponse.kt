@@ -7,9 +7,11 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming
 data class VideoResponse(
     val id: Long,
 
+    val categoriaId: Long,
+
     val titulo: String,
 
     val descricao: String,
 
-    val url: String
+    val url: String,
 )

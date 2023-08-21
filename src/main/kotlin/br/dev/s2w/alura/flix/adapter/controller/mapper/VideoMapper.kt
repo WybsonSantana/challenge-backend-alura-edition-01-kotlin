@@ -7,7 +7,7 @@ import br.dev.s2w.alura.flix.domain.model.Video
 object VideoMapper {
 
     fun Video.toVideoResponse(): VideoResponse {
-        return VideoResponse(id!!, titulo, descricao, url)
+        return VideoResponse(id!!, categoria?.id!!, titulo, descricao, url)
     }
 
     fun VideoRequest.toVideo(): Video {

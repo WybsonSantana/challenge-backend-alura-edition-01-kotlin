@@ -7,5 +7,7 @@ data class Video(
 
     val descricao: String,
 
-    val url: String
+    val url: String,
+
+    val categoria: Categoria? = null
 )

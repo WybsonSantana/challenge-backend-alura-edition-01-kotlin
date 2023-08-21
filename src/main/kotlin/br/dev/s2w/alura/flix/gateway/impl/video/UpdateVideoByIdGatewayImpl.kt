@@ -5,6 +5,7 @@ import br.dev.s2w.alura.flix.domain.gateway.video.UpdateVideoByIdGateway
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.gateway.repository.VideoRepository
 import br.dev.s2w.alura.flix.gateway.repository.entity.VideoEntity
+import br.dev.s2w.alura.flix.gateway.repository.mapper.CategoriaEntityMapper.toCategoriaEntity
 import br.dev.s2w.alura.flix.gateway.repository.mapper.VideoEntityMapper.toVideo
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_NOT_FOUND_EXCEPTION_MESSAGE
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException
@@ -29,7 +30,8 @@ class UpdateVideoByIdGatewayImpl(
         return referencedVideo.copy(
             titulo = video.titulo,
             descricao = video.descricao,
-            url = video.url
+            url = video.url,
+            categoria = video.categoria?.toCategoriaEntity()
         )
     }
 }

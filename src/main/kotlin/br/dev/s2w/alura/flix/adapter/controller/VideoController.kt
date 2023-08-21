@@ -41,7 +41,7 @@ class VideoController(
         @RequestBody @Valid videoRequest: VideoRequest,
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<VideoResponse> {
-        insertVideoUsecase.execute(videoRequest.toVideo()).also {
+        insertVideoUsecase.execute(videoRequest.categoriaId, videoRequest.toVideo()).also {
             val uri = buildVideoUri(it, uriBuilder)
             return ResponseEntity.created(uri).body(it.toVideoResponse())
         }
@@ -52,7 +52,7 @@ class VideoController(
         @PathVariable id: Long,
         @RequestBody @Valid videoRequest: VideoRequest
     ): ResponseEntity<VideoResponse> {
-        updateVideoByIdUsecase.execute(id, videoRequest.toVideo()).also {
+        updateVideoByIdUsecase.execute(id, videoRequest.categoriaId, videoRequest.toVideo()).also {
             return ResponseEntity.ok(it.toVideoResponse())
         }
     }
