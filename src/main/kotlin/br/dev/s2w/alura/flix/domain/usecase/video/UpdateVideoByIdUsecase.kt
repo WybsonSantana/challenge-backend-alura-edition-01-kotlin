@@ -16,19 +16,19 @@ class UpdateVideoByIdUsecase(
         val targetCategoriaId = categoriaId.takeIf { it != null && it > 0L }
             ?: targetVideo.categoria?.id ?: 1L
 
-        val targetCategoria = categoriaService.retrieveOneBy(targetCategoriaId)
+        val categoriaToInsert = categoriaService.retrieveOneBy(targetCategoriaId)
 
-        val videoToUpdate = buildVideo(video, targetCategoria)
+        val videoToUpdate = buildVideo(video, categoriaToInsert)
 
         return videoService.modifyOneBy(videoId, videoToUpdate)
     }
 
-    private fun buildVideo(video: Video, targetCategoria: Categoria): Video {
+    private fun buildVideo(video: Video, categoriaToInsert: Categoria): Video {
         return Video(
             titulo = video.titulo,
             descricao = video.descricao,
             url = video.url,
-            categoria = targetCategoria
+            categoria = categoriaToInsert
         )
     }
 }

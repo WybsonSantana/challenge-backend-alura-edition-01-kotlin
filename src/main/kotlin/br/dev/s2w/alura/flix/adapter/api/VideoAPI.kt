@@ -8,11 +8,11 @@ import org.springframework.web.util.UriComponentsBuilder
 interface VideoAPI {
     fun findAllVideos(): List<VideoResponse>
 
-    fun findVideoById(id: Long): ResponseEntity<VideoResponse>
+    fun findVideoById(videoId: Long): ResponseEntity<VideoResponse>
 
     fun insertVideo(videoRequest: VideoRequest, uriBuilder: UriComponentsBuilder): ResponseEntity<VideoResponse>
 
-    fun updateVideo(id: Long, videoRequest: VideoRequest): ResponseEntity<VideoResponse>
+    fun updateVideo(videoId: Long, videoRequest: VideoRequest): ResponseEntity<VideoResponse>
 
-    fun deleteVideoById(id: Long): ResponseEntity<Unit>
+    fun deleteVideoById(videoId: Long): ResponseEntity<Unit>
 }

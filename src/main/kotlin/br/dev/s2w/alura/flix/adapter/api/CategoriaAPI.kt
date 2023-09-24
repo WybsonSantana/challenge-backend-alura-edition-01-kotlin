@@ -8,14 +8,11 @@ import org.springframework.web.util.UriComponentsBuilder
 interface CategoriaAPI {
     fun findAllCategorias(): List<CategoriaResponse>
 
-    fun findCategoriaById(id: Long): ResponseEntity<CategoriaResponse>
+    fun findCategoriaById(categoriaId: Long): ResponseEntity<CategoriaResponse>
 
-    fun insertCategoria(
-        categoriaRequest: CategoriaRequest,
-        uriBuilder: UriComponentsBuilder
-    ): ResponseEntity<CategoriaResponse>
+    fun insertCategoria(categoriaRequest: CategoriaRequest, uriBuilder: UriComponentsBuilder): ResponseEntity<CategoriaResponse>
 
-    fun updateCategoria(id: Long, categoriaRequest: CategoriaRequest): ResponseEntity<CategoriaResponse>
+    fun updateCategoria(categoriaId: Long, categoriaRequest: CategoriaRequest): ResponseEntity<CategoriaResponse>
 
-    fun deleteCategoriaById(id: Long): ResponseEntity<Unit>
+    fun deleteCategoriaById(categoriaId: Long): ResponseEntity<Unit>
 }

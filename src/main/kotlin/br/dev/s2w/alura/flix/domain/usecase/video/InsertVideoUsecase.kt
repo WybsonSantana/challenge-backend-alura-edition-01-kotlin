@@ -13,19 +13,19 @@ class InsertVideoUsecase(
     fun execute(categoriaId: Long?, video: Video): Video {
         val targetCategoriaId = categoriaId?.takeIf { it > 0L } ?: 1L
 
-        val categoria = categoriaService.retrieveOneBy(targetCategoriaId)
+        val categoriaToInsert = categoriaService.retrieveOneBy(targetCategoriaId)
 
-        val videoToInsert = buildVideo(video, categoria)
+        val videoToInsert = buildVideo(video, categoriaToInsert)
 
         return videoService.saveOne(videoToInsert)
     }
 
-    private fun buildVideo(video: Video, categoria: Categoria): Video {
+    private fun buildVideo(video: Video, categoriaToInsert: Categoria): Video {
         return Video(
             titulo = video.titulo,
             descricao = video.descricao,
             url = video.url,
-            categoria = categoria
+            categoria = categoriaToInsert
         )
     }
 }

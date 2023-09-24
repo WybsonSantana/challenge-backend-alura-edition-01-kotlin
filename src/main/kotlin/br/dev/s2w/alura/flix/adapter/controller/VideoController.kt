@@ -8,7 +8,7 @@ import br.dev.s2w.alura.flix.adapter.controller.response.VideoResponse
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.domain.usecase.*
 import br.dev.s2w.alura.flix.domain.usecase.video.*
-import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_API_V1_MAPPING
+import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_V1_API_PATH
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -16,7 +16,7 @@ import java.net.URI
 import javax.validation.Valid
 
 @RestController
-@RequestMapping(VIDEO_API_V1_MAPPING)
+@RequestMapping(VIDEO_V1_API_PATH)
 class VideoController(
     private val findAllVideosUsecase: FindAllVideosUsecase,
     private val findVideoByIdUsecase: FindVideoByIdUsecase,
@@ -30,9 +30,10 @@ class VideoController(
         return findAllVideosUsecase.execute().map { it.toVideoResponse() }
     }
 
-    @GetMapping("/{id}")
-    override fun findVideoById(@PathVariable id: Long): ResponseEntity<VideoResponse> {
-        val videoResponse = findVideoByIdUsecase.execute(id).toVideoResponse()
+    @GetMapping("/{videoId}")
+    override fun findVideoById(@PathVariable videoId: Long): ResponseEntity<VideoResponse> {
+        val videoResponse = findVideoByIdUsecase.execute(videoId).toVideoResponse()
+
         return ResponseEntity.ok(videoResponse)
     }
 
@@ -41,30 +42,43 @@ class VideoController(
         @RequestBody @Valid videoRequest: VideoRequest,
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<VideoResponse> {
-        insertVideoUsecase.execute(videoRequest.categoriaId, videoRequest.toVideo()).also {
+        val categoriaId = videoRequest.categoriaId
+        val video = videoRequest.toVideo()
+
+        insertVideoUsecase.execute(categoriaId, video).also {
             val uri = buildVideoUri(it, uriBuilder)
             return ResponseEntity.created(uri).body(it.toVideoResponse())
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{videoId}")
     override fun updateVideo(
-        @PathVariable id: Long,
+        @PathVariable videoId: Long,
         @RequestBody @Valid videoRequest: VideoRequest
     ): ResponseEntity<VideoResponse> {
-        updateVideoByIdUsecase.execute(id, videoRequest.categoriaId, videoRequest.toVideo()).also {
+        val categoriaId = videoRequest.categoriaId
+        val video = videoRequest.toVideo()
+
+        updateVideoByIdUsecase.execute(videoId, categoriaId, video).also {
             return ResponseEntity.ok(it.toVideoResponse())
         }
     }
 
-    @DeleteMapping("/{id}")
-    override fun deleteVideoById(@PathVariable id: Long): ResponseEntity<Unit> {
-        deleteVideoByIdUsecase.execute(id).also {
+    @DeleteMapping("/{videoId}")
+    override fun deleteVideoById(@PathVariable videoId: Long): ResponseEntity<Unit> {
+        deleteVideoByIdUsecase.execute(videoId).also {
             return ResponseEntity.noContent().build()
         }
     }
 
     private fun buildVideoUri(createdVideo: Video, uriBuilder: UriComponentsBuilder): URI {
-        return uriBuilder.path("$VIDEO_API_V1_MAPPING/${createdVideo.id}").build().toUri()
+        val videoId = createdVideo.id
+        val videoApiPath = VIDEO_V1_API_PATH
+        val videoUri = uriBuilder
+            .path("/$videoApiPath/$videoId")
+            .build()
+            .toUri()
+
+        return videoUri
     }
 }

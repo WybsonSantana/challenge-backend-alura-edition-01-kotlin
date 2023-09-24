@@ -7,8 +7,7 @@ import br.dev.s2w.alura.flix.adapter.controller.request.CategoriaRequest
 import br.dev.s2w.alura.flix.adapter.controller.response.CategoriaResponse
 import br.dev.s2w.alura.flix.domain.model.Categoria
 import br.dev.s2w.alura.flix.domain.usecase.categoria.*
-import br.dev.s2w.alura.flix.infrastructure.utility.Constants
-import br.dev.s2w.alura.flix.infrastructure.utility.Constants.CATEGORIA_API_V1_MAPPING
+import br.dev.s2w.alura.flix.infrastructure.utility.Constants.CATEGORIA_V1_API_PATH
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -23,7 +22,7 @@ import java.net.URI
 import javax.validation.Valid
 
 @RestController
-@RequestMapping(CATEGORIA_API_V1_MAPPING)
+@RequestMapping(CATEGORIA_V1_API_PATH)
 class CategoriaController(
     private val findAllCategoriasUsecase: FindAllCategoriasUsecase,
     private val findCategoriaByIdUsecase: FindCategoriaByIdUsecase,
@@ -37,9 +36,10 @@ class CategoriaController(
         return findAllCategoriasUsecase.execute().map { it.toCategoriaResponse() }
     }
 
-    @GetMapping("/{id}")
-    override fun findCategoriaById(@PathVariable id: Long): ResponseEntity<CategoriaResponse> {
-        val categoriaResponse = findCategoriaByIdUsecase.execute(id).toCategoriaResponse()
+    @GetMapping("/{categoriaId}")
+    override fun findCategoriaById(@PathVariable categoriaId: Long): ResponseEntity<CategoriaResponse> {
+        val categoriaResponse = findCategoriaByIdUsecase.execute(categoriaId).toCategoriaResponse()
+
         return ResponseEntity.ok(categoriaResponse)
     }
 
@@ -50,28 +50,36 @@ class CategoriaController(
     ): ResponseEntity<CategoriaResponse> {
         insertCategoriaUsecase.execute(categoriaRequest.toCategoria()).also {
             val uri = buildCategoriaUri(it, uriBuilder)
+
             return ResponseEntity.created(uri).body(it.toCategoriaResponse())
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{categoriaId}")
     override fun updateCategoria(
-        @PathVariable id: Long,
+        @PathVariable categoriaId: Long,
         @RequestBody @Valid categoriaRequest: CategoriaRequest
     ): ResponseEntity<CategoriaResponse> {
-        updateCategoriaByIdUsecase.execute(id, categoriaRequest.toCategoria()).also {
+        updateCategoriaByIdUsecase.execute(categoriaId, categoriaRequest.toCategoria()).also {
             return ResponseEntity.ok(it.toCategoriaResponse())
         }
     }
 
-    @DeleteMapping("/{id}")
-    override fun deleteCategoriaById(@PathVariable id: Long): ResponseEntity<Unit> {
-        deleteCategoriaByIdUsecase.execute(id).also {
+    @DeleteMapping("/{categoriaId}")
+    override fun deleteCategoriaById(@PathVariable categoriaId: Long): ResponseEntity<Unit> {
+        deleteCategoriaByIdUsecase.execute(categoriaId).also {
             return ResponseEntity.noContent().build()
         }
     }
 
     private fun buildCategoriaUri(createdCategoria: Categoria, uriBuilder: UriComponentsBuilder): URI {
-        return uriBuilder.path("${Constants.CATEGORIA_API_V1_MAPPING}/${createdCategoria.id}").build().toUri()
+        val categoriaId = createdCategoria.id
+        val categoriaApiPath = CATEGORIA_V1_API_PATH
+        val categoriaUri = uriBuilder
+            .path("/$categoriaApiPath/$categoriaId")
+            .build()
+            .toUri()
+
+        return categoriaUri
     }
 }
