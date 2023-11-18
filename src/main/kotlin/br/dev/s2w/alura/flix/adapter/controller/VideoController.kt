@@ -8,6 +8,8 @@ import br.dev.s2w.alura.flix.adapter.controller.response.VideoResponse
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.domain.usecase.*
 import br.dev.s2w.alura.flix.domain.usecase.video.*
+import br.dev.s2w.alura.flix.gateway.repository.VideoRepository
+import br.dev.s2w.alura.flix.gateway.repository.mapper.VideoEntityMapper.toVideo
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_V1_API_PATH
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -20,6 +22,7 @@ import javax.validation.Valid
 class VideoController(
     private val findAllVideosUsecase: FindAllVideosUsecase,
     private val findAllVideosByCategoriaUsecase: FindAllVideosByCategoriaUsecase,
+    private val findAllVideosByTituloUsecase: FindAllVideosByTituloUsecase,
     private val findVideoByIdUsecase: FindVideoByIdUsecase,
     private val insertVideoUsecase: InsertVideoUsecase,
     private val updateVideoByIdUsecase: UpdateVideoByIdUsecase,
@@ -34,6 +37,11 @@ class VideoController(
     @GetMapping("/categoria/{categoriaId}")
     override fun findAllVideosByCategoria(@PathVariable categoriaId: Long): List<VideoResponse> {
         return findAllVideosByCategoriaUsecase.execute(categoriaId).map { it.toVideoResponse() }
+    }
+
+    @GetMapping("/search")
+    override fun findAllVideosByTitulo(@RequestParam titulo: String): List<VideoResponse> {
+        return findAllVideosByTituloUsecase.execute(titulo).map { it.toVideoResponse() }
     }
 
     @GetMapping("/{videoId}")

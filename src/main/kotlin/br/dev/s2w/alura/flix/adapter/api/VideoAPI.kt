@@ -10,6 +10,8 @@ interface VideoAPI {
 
     fun findAllVideosByCategoria(categoriaId: Long): List<VideoResponse>
 
+    fun findAllVideosByTitulo(titulo: String): List<VideoResponse>
+
     fun findVideoById(videoId: Long): ResponseEntity<VideoResponse>
 
     fun insertVideo(videoRequest: VideoRequest, uriBuilder: UriComponentsBuilder): ResponseEntity<VideoResponse>

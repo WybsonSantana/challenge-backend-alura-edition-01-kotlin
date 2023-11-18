@@ -7,6 +7,8 @@ interface VideoService {
 
     fun retriveAllByCategoria(id: Long): List<Video>
 
+    fun retriveAllByTitulo(titulo: String): List<Video>
+
     fun retriveOneBy(id: Long): Video
 
     fun saveOne(video: Video): Video

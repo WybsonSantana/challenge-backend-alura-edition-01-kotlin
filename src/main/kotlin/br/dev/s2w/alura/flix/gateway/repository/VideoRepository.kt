@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface VideoRepository : JpaRepository<VideoEntity, Long> {
     fun findByCategoriaId(categoriaId: Long): List<VideoEntity>
+
+    fun findByTituloContaining(titulo: String): List<VideoEntity>
 }
