@@ -8,6 +8,8 @@ import org.springframework.web.util.UriComponentsBuilder
 interface VideoAPI {
     fun findAllVideos(): List<VideoResponse>
 
+    fun findAllVideosByCategoria(categoriaId: Long): List<VideoResponse>
+
     fun findVideoById(videoId: Long): ResponseEntity<VideoResponse>
 
     fun insertVideo(videoRequest: VideoRequest, uriBuilder: UriComponentsBuilder): ResponseEntity<VideoResponse>

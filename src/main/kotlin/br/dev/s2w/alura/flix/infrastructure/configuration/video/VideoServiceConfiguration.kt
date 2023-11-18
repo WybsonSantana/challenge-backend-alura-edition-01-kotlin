@@ -12,6 +12,7 @@ class VideoServiceConfiguration {
     @Bean
     fun videoService(
         findAllVideosGateway: FindAllVideosGateway,
+        findAllVideosByCategoriaGateway: FindAllVideosByCategoriaGateway,
         findVideoByIdGateway: FindVideoByIdGateway,
         insertVideoGateway: InsertVideoGateway,
         updateVideoByIdGateway: UpdateVideoByIdGateway,
@@ -19,6 +20,7 @@ class VideoServiceConfiguration {
     ): VideoService {
         return VideoServiceImpl(
             findAllVideosGateway,
+            findAllVideosByCategoriaGateway,
             findVideoByIdGateway,
             insertVideoGateway,
             updateVideoByIdGateway,

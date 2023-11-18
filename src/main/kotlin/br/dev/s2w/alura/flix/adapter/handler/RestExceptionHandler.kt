@@ -94,8 +94,8 @@ class RestExceptionHandler {
         )
     }
 
-    @ExceptionHandler(Exception::class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    //@ExceptionHandler(Exception::class)
+    //@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleInternalServerError(
         request: HttpServletRequest
     ): ErrorResponse {

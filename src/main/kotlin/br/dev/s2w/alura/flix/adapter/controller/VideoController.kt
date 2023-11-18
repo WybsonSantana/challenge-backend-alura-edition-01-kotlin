@@ -19,6 +19,7 @@ import javax.validation.Valid
 @RequestMapping(VIDEO_V1_API_PATH)
 class VideoController(
     private val findAllVideosUsecase: FindAllVideosUsecase,
+    private val findAllVideosByCategoriaUsecase: FindAllVideosByCategoriaUsecase,
     private val findVideoByIdUsecase: FindVideoByIdUsecase,
     private val insertVideoUsecase: InsertVideoUsecase,
     private val updateVideoByIdUsecase: UpdateVideoByIdUsecase,
@@ -28,6 +29,11 @@ class VideoController(
     @GetMapping
     override fun findAllVideos(): List<VideoResponse> {
         return findAllVideosUsecase.execute().map { it.toVideoResponse() }
+    }
+
+    @GetMapping("/categoria/{categoriaId}")
+    override fun findAllVideosByCategoria(@PathVariable categoriaId: Long): List<VideoResponse> {
+        return findAllVideosByCategoriaUsecase.execute(categoriaId).map { it.toVideoResponse() }
     }
 
     @GetMapping("/{videoId}")

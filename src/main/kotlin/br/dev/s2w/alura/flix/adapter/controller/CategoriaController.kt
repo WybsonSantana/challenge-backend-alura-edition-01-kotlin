@@ -3,10 +3,14 @@ package br.dev.s2w.alura.flix.adapter.controller
 import br.dev.s2w.alura.flix.adapter.api.CategoriaAPI
 import br.dev.s2w.alura.flix.adapter.controller.mapper.CategoriaMapper.toCategoria
 import br.dev.s2w.alura.flix.adapter.controller.mapper.CategoriaMapper.toCategoriaResponse
+import br.dev.s2w.alura.flix.adapter.controller.mapper.VideoMapper.toVideoResponse
 import br.dev.s2w.alura.flix.adapter.controller.request.CategoriaRequest
 import br.dev.s2w.alura.flix.adapter.controller.response.CategoriaResponse
+import br.dev.s2w.alura.flix.adapter.controller.response.VideoResponse
 import br.dev.s2w.alura.flix.domain.model.Categoria
 import br.dev.s2w.alura.flix.domain.usecase.categoria.*
+import br.dev.s2w.alura.flix.gateway.repository.VideoRepository
+import br.dev.s2w.alura.flix.gateway.repository.mapper.VideoEntityMapper.toVideo
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.CATEGORIA_V1_API_PATH
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping

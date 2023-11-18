@@ -2,6 +2,7 @@ package br.dev.s2w.alura.flix.adapter.api
 
 import br.dev.s2w.alura.flix.adapter.controller.request.CategoriaRequest
 import br.dev.s2w.alura.flix.adapter.controller.response.CategoriaResponse
+import br.dev.s2w.alura.flix.adapter.controller.response.VideoResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.util.UriComponentsBuilder
 

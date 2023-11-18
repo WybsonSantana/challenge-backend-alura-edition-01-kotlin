@@ -6,6 +6,7 @@ import br.dev.s2w.alura.flix.domain.service.VideoService
 
 class VideoServiceImpl(
     private val findAllVideosGateway: FindAllVideosGateway,
+    private val findAllVideosByCategoriaGateway: FindAllVideosByCategoriaGateway,
     private val findVideoByIdGateway: FindVideoByIdGateway,
     private val insertVideoGateway: InsertVideoGateway,
     private val updateVideoByIdGateway: UpdateVideoByIdGateway,
@@ -14,6 +15,10 @@ class VideoServiceImpl(
 
     override fun retrieve(): List<Video> {
         return findAllVideosGateway.fetch()
+    }
+
+    override fun retriveAllByCategoria(id: Long): List<Video> {
+        return findAllVideosByCategoriaGateway.fetchByCategoria(id)
     }
 
     override fun retriveOneBy(id: Long): Video {
