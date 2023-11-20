@@ -3,6 +3,7 @@ package br.dev.s2w.alura.flix.infrastructure.utility
 object Constants {
 
     // API Mapping
+    const val LOCAL_HOST = "http://localhost"
     const val CATEGORIA_V1_API_PATH = "/api/v1/categorias"
     const val VIDEO_V1_API_PATH = "/api/v1/videos"
 

@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "titulo": "Livre",
+    "cor": "Branca"
+  },
+  {
+    "id": 2,
+    "titulo": "Back-end",
+    "cor": "Vermelha"
+  },
+  {
+    "id": 3,
+    "titulo": "Banco de Dados",
+    "cor": "Azul"
+  }
+]

@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class AluraFlixApplication
 
 fun main(args: Array<String>) {
-	runApplication<AluraFlixApplication>(*args)
+    runApplication<AluraFlixApplication>(*args)
 }
