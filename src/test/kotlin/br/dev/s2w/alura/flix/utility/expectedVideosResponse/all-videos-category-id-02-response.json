@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "categoria_id": 2,
+    "titulo": "Semana 01 | Challenge Back-End",
+    "descricao": "Primeiro vídeo do Challenge Backend edição 01",
+    "url": "https://youtu.be/UiQw2HM4DtM"
+  },
+  {
+    "id": 2,
+    "categoria_id": 2,
+    "titulo": "Semana 02 | Challenge Back-End",
+    "descricao": "Segundo vídeo do Challenge Backend edição 01",
+    "url": "https://youtu.be/dq3hZSOcMhI"
+  },
+  {
+    "id": 3,
+    "categoria_id": 2,
+    "titulo": "Semana 03 e 04 | Challenge Back-End",
+    "descricao": "Terceiro vídeo do Challenge Backend edição 01",
+    "url": "https://youtu.be/Cw_GxlFnHTg"
+  }
+]
