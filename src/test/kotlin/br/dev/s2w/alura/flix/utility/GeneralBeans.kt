@@ -1,7 +1,5 @@
 package br.dev.s2w.alura.flix.utility
 
-import br.dev.s2w.alura.flix.gateway.repository.CategoriaRepository
-import org.springframework.boot.test.mock.mockito.MockBean
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -38,8 +36,8 @@ open class GeneralBeans {
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/all-videos-response.json"
 
 
-    fun getAllVideosCategoryId02ResponseFileUri() =
-        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/all-videos-category-id-02-response.json"
+    fun getAllVideosWithCategoryId02ResponseFileUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/all-videos-with-category-id-02-response.json"
 
     fun getVideoWeek01ResponseFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-week-01-response.json"
@@ -74,8 +72,8 @@ open class GeneralBeans {
     fun getBlankFieldVideoRequestFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosRequest/blank-field-video-request.json"
 
-    fun getInvalidUrlVideoRequestFileUri() =
-        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosRequest/invalid-url-video-request.json"
+    fun getInvalidUrlFieldVideoRequestFileUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosRequest/invalid-url-field-video-request.json"
 
     fun readJsonContentFromFile(uri: String): String {
         val filePath = Paths.get(uri)

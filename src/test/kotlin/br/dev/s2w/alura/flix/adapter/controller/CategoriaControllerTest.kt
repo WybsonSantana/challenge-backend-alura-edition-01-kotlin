@@ -1,7 +1,6 @@
 package br.dev.s2w.alura.flix.adapter.controller
 
 import br.dev.s2w.alura.flix.gateway.repository.CategoriaRepository
-import br.dev.s2w.alura.flix.infrastructure.utility.Constants
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.ARGUMENT_NOT_VALID_MESSAGE
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.CATEGORIA_IN_USE_EXCEPTION_MESSAGE
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.CATEGORIA_NOT_FOUND_EXCEPTION_MESSAGE
@@ -111,13 +110,10 @@ internal class CategoriaControllerTest : GeneralBeans() {
                 .accept(MediaType.APPLICATION_JSON)
                 .content(cloudCategoryExpectedRequest)
         )
-            .andExpect(
-                MockMvcResultMatchers.header()
-                    .string("Location", LOCAL_HOST.plus(CATEGORIA_V1_API_PATH).plus("/4"))
-            )
             .andExpect(MockMvcResultMatchers.status().isCreated)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.content().json(cloudCategoryExpectedResponse))
+            .andExpect(MockMvcResultMatchers.header().string("Location", LOCAL_HOST.plus(CATEGORIA_V1_API_PATH).plus("/4")))
     }
 
     @Test
@@ -165,9 +161,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(
-                MockMvcResultMatchers.jsonPath("$.message").value(CATEGORIA_NOT_FOUND_EXCEPTION_MESSAGE)
-            )
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(CATEGORIA_NOT_FOUND_EXCEPTION_MESSAGE))
     }
 
     @Test
@@ -179,9 +173,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(
-                MockMvcResultMatchers.jsonPath("$.message").value(CATEGORIA_NOT_FOUND_EXCEPTION_MESSAGE)
-            )
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(CATEGORIA_NOT_FOUND_EXCEPTION_MESSAGE))
     }
 
     @Test
@@ -226,9 +218,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(
-                MockMvcResultMatchers.jsonPath("$.message").value(CATEGORIA_NOT_FOUND_EXCEPTION_MESSAGE)
-            )
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(CATEGORIA_NOT_FOUND_EXCEPTION_MESSAGE))
     }
 
     @Test

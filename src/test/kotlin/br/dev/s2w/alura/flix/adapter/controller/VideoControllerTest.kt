@@ -7,7 +7,8 @@ import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_NOT_FOUND_EX
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_V1_API_PATH
 import br.dev.s2w.alura.flix.utility.GeneralBeans
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
+import org.mockito.Mockito.anyLong
+import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -47,9 +48,9 @@ internal class VideoControllerTest : GeneralBeans() {
     }
 
     @Test
-    fun `should return all videos category ID 02 when status is 200 ok`() {
-        val fileResponseUr = super.getAllVideosCategoryId02ResponseFileUri()
-        val allVideosCategoryId02ExpectedResponse = super.readJsonContentFromFile(fileResponseUr)
+    fun `should return all videos with category ID 02 when status is 200 ok`() {
+        val fileResponseUri = super.getAllVideosWithCategoryId02ResponseFileUri()
+        val allVideosWithCategoryId02ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH)
@@ -58,7 +59,7 @@ internal class VideoControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.content().json(allVideosCategoryId02ExpectedResponse))
+            .andExpect(MockMvcResultMatchers.content().json(allVideosWithCategoryId02ExpectedResponse))
     }
 
     @Test
@@ -121,8 +122,7 @@ internal class VideoControllerTest : GeneralBeans() {
     @Test
     fun `should return an empty list when the search does not find any video with the searched title`() {
         mockMvc.perform(
-            MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/search"))
-                .queryParam("titulo", "233955e3-9fec-46a1-bd75-34a4f488b39a")
+            MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/search")).queryParam("titulo", "Semana 04")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -184,6 +184,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         val fileResponseUri = super.getVideoId04ResponseFileUri()
         val videoId04ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
+
         mockMvc.perform(
             MockMvcRequestBuilders.post(VIDEO_V1_API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -247,13 +248,13 @@ internal class VideoControllerTest : GeneralBeans() {
     @Test
     fun `should return status code 404 when trying to retrieve a video with a non-existent ID`() {
         mockMvc.perform(
-            MockMvcRequestBuilders.get(Constants.VIDEO_V1_API_PATH.plus("/10"))
+            MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/10"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(Constants.VIDEO_NOT_FOUND_EXCEPTION_MESSAGE))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(VIDEO_NOT_FOUND_EXCEPTION_MESSAGE))
     }
 
     @Test
@@ -262,7 +263,7 @@ internal class VideoControllerTest : GeneralBeans() {
         val blankFieldExpectedRequest = super.readJsonContentFromFile(fileRequestUri)
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post(Constants.VIDEO_V1_API_PATH)
+            MockMvcRequestBuilders.post(VIDEO_V1_API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(blankFieldExpectedRequest)
@@ -274,14 +275,14 @@ internal class VideoControllerTest : GeneralBeans() {
 
     @Test
     fun `should return status code 400 when video url request field is invalid`() {
-        val fileRequestUri = super.getInvalidUrlVideoRequestFileUri()
-        val invalidUrlExpectedVideoRequest = super.readJsonContentFromFile(fileRequestUri)
+        val fileRequestUri = super.getInvalidUrlFieldVideoRequestFileUri()
+        val invalidUrlFieldExpectedVideoRequest = super.readJsonContentFromFile(fileRequestUri)
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post(Constants.VIDEO_V1_API_PATH)
+            MockMvcRequestBuilders.post(VIDEO_V1_API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .content(invalidUrlExpectedVideoRequest)
+                .content(invalidUrlFieldExpectedVideoRequest)
         )
             .andExpect(MockMvcResultMatchers.status().isBadRequest)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
@@ -291,7 +292,7 @@ internal class VideoControllerTest : GeneralBeans() {
     @Test
     fun `should return status code 400 when trying to save a video with non-existent or invalid json`() {
         mockMvc.perform(
-            MockMvcRequestBuilders.post(Constants.VIDEO_V1_API_PATH)
+            MockMvcRequestBuilders.post(VIDEO_V1_API_PATH)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content("{}")
@@ -307,35 +308,35 @@ internal class VideoControllerTest : GeneralBeans() {
         val videoId03ExpectedUpdatedResponse = super.readJsonContentFromFile(fileRequestUri)
 
         mockMvc.perform(
-            MockMvcRequestBuilders.put(Constants.VIDEO_V1_API_PATH.plus("/10"))
+            MockMvcRequestBuilders.put(VIDEO_V1_API_PATH.plus("/10"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(videoId03ExpectedUpdatedResponse)
         )
             .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(Constants.VIDEO_NOT_FOUND_EXCEPTION_MESSAGE))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(VIDEO_NOT_FOUND_EXCEPTION_MESSAGE))
     }
 
     @Test
     fun `should return status code 404 when trying to delete a video with a non-existent ID`() {
         mockMvc.perform(
-            MockMvcRequestBuilders.delete(Constants.VIDEO_V1_API_PATH.plus("/10"))
+            MockMvcRequestBuilders.delete(VIDEO_V1_API_PATH.plus("/10"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
             .andExpect(MockMvcResultMatchers.status().isNotFound)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(Constants.VIDEO_NOT_FOUND_EXCEPTION_MESSAGE))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(VIDEO_NOT_FOUND_EXCEPTION_MESSAGE))
     }
 
     @Test
     fun `should return status code 500 when data base connection fail`() {
-        Mockito.`when`(videoRepository.findById(Mockito.anyLong()))
+        `when`(videoRepository.findById(anyLong()))
             .thenThrow(PersistenceException("Database transaction failed!"))
 
         mockMvc.perform(
-            MockMvcRequestBuilders.get(Constants.VIDEO_V1_API_PATH.plus("/9"))
+            MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/9"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
