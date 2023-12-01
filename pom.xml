@@ -114,6 +114,9 @@
                         <plugin>jpa</plugin>
                         <plugin>no-arg</plugin>
                     </compilerPlugins>
+                    <pluginOptions>
+                        <option>no-arg:annotation=br.dev.s2w.alura.flix.infrastructure.annotation.NoArg</option>
+                    </pluginOptions>
                 </configuration>
                 <dependencies>
                     <dependency>
