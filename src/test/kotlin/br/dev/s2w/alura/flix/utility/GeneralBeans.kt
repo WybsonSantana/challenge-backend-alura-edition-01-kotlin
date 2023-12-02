@@ -1,5 +1,9 @@
 package br.dev.s2w.alura.flix.utility
 
+import br.dev.s2w.alura.flix.gateway.repository.CategoriaRepository
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.mockito.Mock
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -77,7 +81,15 @@ open class GeneralBeans {
 
     fun readJsonContentFromFile(uri: String): String {
         val filePath = Paths.get(uri)
-        val fileContent = String(Files.readAllBytes(filePath))
-        return fileContent
+        return String(Files.readAllBytes(filePath))
+    }
+
+    inline fun <reified T> buildTypeReference(): TypeReference<T> {
+        return object : TypeReference<T>() {}
+    }
+
+    inline fun <reified T> convertJsonContentStringToObject(jsonContent: String, typeReference: TypeReference<T>): T {
+        val objectMapper = ObjectMapper()
+        return objectMapper.readValue(jsonContent, typeReference)
     }
 }
