@@ -1,9 +1,7 @@
 package br.dev.s2w.alura.flix.utility
 
-import br.dev.s2w.alura.flix.gateway.repository.CategoriaRepository
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.mockito.Mock
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -42,6 +40,33 @@ open class GeneralBeans {
 
     fun getAllVideosWithCategoryId02ResponseFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/all-videos-with-category-id-02-response.json"
+
+    fun getAllVideosWeekQueryResultUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-all-week-query-result.json"
+
+    fun getVideoWeek01QueryResultUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-week-01-query-result.json"
+
+    fun getVideoWeek02QueryResultUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-week-02-query-result.json"
+
+    fun getVideoWeek03QueryResultUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-week-03-query-result.json"
+
+    fun getVideoId01QueryResultUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-01-query-result.json"
+
+    fun getVideoId02QueryResultUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-02-query-result.json"
+
+    fun getVideoId03QueryResultUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-03-query-result.json"
+
+    fun getVideoId03UpdatedQueryResultUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-03-updated-query-result.json"
+
+    fun getVideoId04QueryResultUri() =
+        "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-04-query-result.json"
 
     fun getVideoWeek01ResponseFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-week-01-response.json"

@@ -1,0 +1,11 @@
+{
+  "id": 2,
+  "titulo": "Semana 02 | Challenge Back-End",
+  "descricao": "Segundo vídeo do Challenge Backend edição 01",
+  "url": "https://youtu.be/dq3hZSOcMhI",
+  "categoria": {
+    "id": 2,
+    "titulo": "Back-end",
+    "cor": "Vermelha"
+  }
+}
