@@ -55,10 +55,10 @@ internal class FindCategoriaByIdGatewayImplTest : GeneralBeans() {
     @Test
     fun `should return back-end category`() {
         val fileResponseUri = super.getBackEndCategoryResponseFileUri()
-        val freeCategoryExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
+        val backEndCategoryExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(
-            freeCategoryExpectedResponse,
+            backEndCategoryExpectedResponse,
             super.buildTypeReference<CategoriaEntity>()
         )
 
@@ -77,10 +77,10 @@ internal class FindCategoriaByIdGatewayImplTest : GeneralBeans() {
     @Test
     fun `should return data base category`() {
         val fileResponseUri = super.getDataBaseCategoryResponseFileUri()
-        val freeCategoryExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
+        val dataBaseCategoryExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(
-            freeCategoryExpectedResponse,
+            dataBaseCategoryExpectedResponse,
             super.buildTypeReference<CategoriaEntity>()
         )
 

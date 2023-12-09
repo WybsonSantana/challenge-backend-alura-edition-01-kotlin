@@ -28,7 +28,7 @@ internal class FindAllVideosByTituloGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should return all videos with title containing Semana`() {
-        val fileResponseUri = super.getAllVideosWeekQueryResultUri()
+        val fileResponseUri = super.getAllVideosWeekQueryResultFileUri()
         val allVideosWeekExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(
@@ -50,7 +50,7 @@ internal class FindAllVideosByTituloGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should return a video with title containing Semana 01`() {
-        val fileResponseUri = super.getVideoWeek01QueryResultUri()
+        val fileResponseUri = super.getVideoWeek01QueryResultFileUri()
         val videoWeek01ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(
@@ -72,7 +72,7 @@ internal class FindAllVideosByTituloGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should return a video with title containing Semana 02`() {
-        val fileResponseUri = super.getVideoWeek02QueryResultUri()
+        val fileResponseUri = super.getVideoWeek02QueryResultFileUri()
         val videoWeek02ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(
@@ -94,7 +94,7 @@ internal class FindAllVideosByTituloGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should return a video with title containing Semana 03`() {
-        val fileResponseUri = super.getVideoWeek03QueryResultUri()
+        val fileResponseUri = super.getVideoWeek03QueryResultFileUri()
         val videoWeek03ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(

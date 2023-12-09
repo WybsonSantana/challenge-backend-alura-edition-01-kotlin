@@ -37,35 +37,34 @@ open class GeneralBeans {
     fun getAllVideosResponseFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/all-videos-response.json"
 
-
     fun getAllVideosWithCategoryId02ResponseFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/all-videos-with-category-id-02-response.json"
 
-    fun getAllVideosWeekQueryResultUri() =
+    fun getAllVideosWeekQueryResultFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-all-week-query-result.json"
 
-    fun getVideoWeek01QueryResultUri() =
+    fun getVideoWeek01QueryResultFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-week-01-query-result.json"
 
-    fun getVideoWeek02QueryResultUri() =
+    fun getVideoWeek02QueryResultFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-week-02-query-result.json"
 
-    fun getVideoWeek03QueryResultUri() =
+    fun getVideoWeek03QueryResultFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-week-03-query-result.json"
 
-    fun getVideoId01QueryResultUri() =
+    fun getVideoId01QueryResultFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-01-query-result.json"
 
-    fun getVideoId02QueryResultUri() =
+    fun getVideoId02QueryResultFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-02-query-result.json"
 
-    fun getVideoId03QueryResultUri() =
+    fun getVideoId03QueryResultFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-03-query-result.json"
 
-    fun getVideoId03UpdatedQueryResultUri() =
+    fun getVideoId03UpdatedQueryResultFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-03-updated-query-result.json"
 
-    fun getVideoId04QueryResultUri() =
+    fun getVideoId04QueryResultFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedVideosResponse/video-id-04-query-result.json"
 
     fun getVideoWeek01ResponseFileUri() =

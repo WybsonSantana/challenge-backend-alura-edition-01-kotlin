@@ -28,7 +28,7 @@ internal class FindAllVideosGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should return all videos`() {
-        val fileResponseUri = super.getAllVideosWeekQueryResultUri()
+        val fileResponseUri = super.getAllVideosWeekQueryResultFileUri()
         val allVideosExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(

@@ -32,10 +32,10 @@ internal class UpdateVideoByIdGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should update video ID 03`() {
-        val fileReferencedUri = super.getVideoId03QueryResultUri()
+        val fileReferencedUri = super.getVideoId03QueryResultFileUri()
         val videoId03ExpectedReferenced = super.readJsonContentFromFile(fileReferencedUri)
 
-        val fileQueryResultUri = super.getVideoId03UpdatedQueryResultUri()
+        val fileQueryResultUri = super.getVideoId03UpdatedQueryResultFileUri()
         val videoId03ExpectedUpdatedObject = super.readJsonContentFromFile(fileQueryResultUri)
 
         val expectedVideoRequest = super.convertJsonContentStringToObject(
@@ -71,7 +71,7 @@ internal class UpdateVideoByIdGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should throw a not found exception when the video ID is non-existent`() {
-        val fileQueryResultUri = super.getVideoId03UpdatedQueryResultUri()
+        val fileQueryResultUri = super.getVideoId03UpdatedQueryResultFileUri()
         val videoId03ExpectedUpdatedObject = super.readJsonContentFromFile(fileQueryResultUri)
 
         val expectedVideoRequest = super.convertJsonContentStringToObject(

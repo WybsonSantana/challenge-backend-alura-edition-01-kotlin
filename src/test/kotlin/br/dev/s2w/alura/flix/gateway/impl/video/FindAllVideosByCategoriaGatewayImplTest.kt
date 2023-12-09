@@ -28,7 +28,7 @@ internal class FindAllVideosByCategoriaGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should return all videos with category ID 02`() {
-        val fileResponseUri = super.getAllVideosWeekQueryResultUri()
+        val fileResponseUri = super.getAllVideosWeekQueryResultFileUri()
         val allVideosCategoryId02ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(

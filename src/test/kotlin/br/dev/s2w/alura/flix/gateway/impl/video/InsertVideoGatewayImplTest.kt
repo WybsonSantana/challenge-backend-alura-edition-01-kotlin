@@ -30,7 +30,7 @@ internal class InsertVideoGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should save video ID 04`() {
-        val fileQueryResultUri = super.getVideoId04QueryResultUri()
+        val fileQueryResultUri = super.getVideoId04QueryResultFileUri()
         val videoId04ExpectedObject = super.readJsonContentFromFile(fileQueryResultUri)
 
         val expectedVideoRequest = super.convertJsonContentStringToObject(

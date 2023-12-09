@@ -32,7 +32,7 @@ internal class FindVideoByIdGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should return video ID 01`() {
-        val fileResponseUri = super.getVideoId01QueryResultUri()
+        val fileResponseUri = super.getVideoId01QueryResultFileUri()
         val videoId01ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(
@@ -54,7 +54,7 @@ internal class FindVideoByIdGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should return video ID 02`() {
-        val fileResponseUri = super.getVideoId02QueryResultUri()
+        val fileResponseUri = super.getVideoId02QueryResultFileUri()
         val videoId02ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(
@@ -76,7 +76,7 @@ internal class FindVideoByIdGatewayImplTest : GeneralBeans() {
 
     @Test
     fun `should return video ID 03`() {
-        val fileResponseUri = super.getVideoId03QueryResultUri()
+        val fileResponseUri = super.getVideoId03QueryResultFileUri()
         val videoId03ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
 
         val expectedRepositoryQueryResult = super.convertJsonContentStringToObject(
