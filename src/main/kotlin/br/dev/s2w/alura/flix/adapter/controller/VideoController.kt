@@ -6,10 +6,7 @@ import br.dev.s2w.alura.flix.adapter.controller.mapper.VideoMapper.toVideoRespon
 import br.dev.s2w.alura.flix.adapter.controller.request.VideoRequest
 import br.dev.s2w.alura.flix.adapter.controller.response.VideoResponse
 import br.dev.s2w.alura.flix.domain.model.Video
-import br.dev.s2w.alura.flix.domain.usecase.*
 import br.dev.s2w.alura.flix.domain.usecase.video.*
-import br.dev.s2w.alura.flix.gateway.repository.VideoRepository
-import br.dev.s2w.alura.flix.gateway.repository.mapper.VideoEntityMapper.toVideo
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_V1_API_PATH
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

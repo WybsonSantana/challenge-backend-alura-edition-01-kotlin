@@ -1,9 +1,9 @@
 package br.dev.s2w.alura.flix.domain.usecase.video
 
-import br.dev.s2w.alura.flix.domain.model.Categoria
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.domain.service.CategoriaService
 import br.dev.s2w.alura.flix.domain.service.VideoService
+import br.dev.s2w.alura.flix.infrastructure.utility.buildVideo
 
 class UpdateVideoByIdUsecase(
     private val videoService: VideoService,
@@ -21,14 +21,5 @@ class UpdateVideoByIdUsecase(
         val videoToUpdate = buildVideo(video, categoriaToInsert)
 
         return videoService.modifyOneBy(videoId, videoToUpdate)
-    }
-
-    private fun buildVideo(video: Video, categoriaToInsert: Categoria): Video {
-        return Video(
-            titulo = video.titulo,
-            descricao = video.descricao,
-            url = video.url,
-            categoria = categoriaToInsert
-        )
     }
 }

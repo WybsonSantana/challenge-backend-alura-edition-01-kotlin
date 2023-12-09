@@ -22,6 +22,7 @@ class UpdateVideoByIdGatewayImpl(
         } catch (e: JpaObjectRetrievalFailureException) {
             throw VideoNotFoundException(VIDEO_NOT_FOUND_EXCEPTION_MESSAGE)
         }
+
         val updatedVideo = buildUpdateVideo(referencedVideo, video)
         return videoRepository.save(updatedVideo).toVideo()
     }
