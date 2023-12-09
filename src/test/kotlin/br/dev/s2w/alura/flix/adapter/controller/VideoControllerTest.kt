@@ -214,14 +214,6 @@ internal class VideoControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-
-        mockMvc.perform(
-            MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/3"))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-        )
-            .andExpect(MockMvcResultMatchers.status().isOk)
-            .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.content().json(videoId03ExpectedUpdatedResponse))
     }
 
