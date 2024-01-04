@@ -9,6 +9,8 @@ import br.dev.s2w.alura.flix.infrastructure.utility.Constants.HTTP_MESSAGE_NOT_R
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.INTERNAL_SERVER_ERROR_MESSAGE
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.LOCAL_HOST
 import br.dev.s2w.alura.flix.utility.GeneralBeans
+import kotlinx.serialization.json.*
+import org.hamcrest.Matchers
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.anyLong
 import org.mockito.Mockito.`when`
@@ -39,6 +41,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
     fun `should return all categories when status is 200 ok`() {
         val fileResponseUri = super.getAllCategoriesResponseFileUri()
         val allCategoriesExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
+        val allCategoriesExpectedJsonArray = Json.parseToJsonElement(allCategoriesExpectedResponse).jsonArray
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(CATEGORIA_V1_API_PATH)
@@ -47,7 +50,21 @@ internal class CategoriaControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.content().json(allCategoriesExpectedResponse))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].id", Matchers.equalTo(allCategoriesExpectedJsonArray[0].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].titulo", Matchers.equalTo(
+                allCategoriesExpectedJsonArray[0].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].cor", Matchers.equalTo(
+                allCategoriesExpectedJsonArray[0].jsonObject["cor"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].id", Matchers.equalTo(allCategoriesExpectedJsonArray[1].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].titulo", Matchers.equalTo(
+                allCategoriesExpectedJsonArray[1].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].cor", Matchers.equalTo(
+                allCategoriesExpectedJsonArray[1].jsonObject["cor"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].id", Matchers.equalTo(allCategoriesExpectedJsonArray[2].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].titulo", Matchers.equalTo(
+                allCategoriesExpectedJsonArray[2].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].cor", Matchers.equalTo(
+                allCategoriesExpectedJsonArray[2].jsonObject["cor"]?.jsonPrimitive?.contentOrNull)))
     }
 
     @Test
@@ -113,7 +130,9 @@ internal class CategoriaControllerTest : GeneralBeans() {
             .andExpect(MockMvcResultMatchers.status().isCreated)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.content().json(cloudCategoryExpectedResponse))
-            .andExpect(MockMvcResultMatchers.header().string("Location", LOCAL_HOST.plus(CATEGORIA_V1_API_PATH).plus("/4")))
+            .andExpect(
+                MockMvcResultMatchers.header().string("Location", LOCAL_HOST.plus(CATEGORIA_V1_API_PATH).plus("/4"))
+            )
     }
 
     @Test

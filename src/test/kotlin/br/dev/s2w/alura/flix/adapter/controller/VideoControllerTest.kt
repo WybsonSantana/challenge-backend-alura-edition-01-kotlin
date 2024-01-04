@@ -1,11 +1,14 @@
 package br.dev.s2w.alura.flix.adapter.controller
 
+import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.gateway.repository.VideoRepository
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.LOCAL_HOST
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_NOT_FOUND_EXCEPTION_MESSAGE
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.VIDEO_V1_API_PATH
 import br.dev.s2w.alura.flix.utility.GeneralBeans
+import kotlinx.serialization.json.*
+import org.hamcrest.Matchers
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.anyLong
 import org.mockito.Mockito.`when`
@@ -36,6 +39,7 @@ internal class VideoControllerTest : GeneralBeans() {
     fun `should return all videos when status is 200 ok`() {
         val fileResponseUri = super.getAllVideosResponseFileUri()
         val allVideosExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
+        val allVideosExpectedJsonArray = Json.parseToJsonElement(allVideosExpectedResponse).jsonArray
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH)
@@ -44,13 +48,35 @@ internal class VideoControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.content().json(allVideosExpectedResponse))
+            .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].id", Matchers.equalTo(allVideosExpectedJsonArray[0].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].categoria_id", Matchers.equalTo(
+                allVideosExpectedJsonArray[0].jsonObject["categoria_id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].titulo", Matchers.equalTo(allVideosExpectedJsonArray[0].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].descricao", Matchers.equalTo(
+                allVideosExpectedJsonArray[0].jsonObject["descricao"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].url", Matchers.equalTo(allVideosExpectedJsonArray[0].jsonObject["url"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].id", Matchers.equalTo(allVideosExpectedJsonArray[1].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].categoria_id", Matchers.equalTo(
+                allVideosExpectedJsonArray[1].jsonObject["categoria_id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].titulo", Matchers.equalTo(allVideosExpectedJsonArray[1].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].descricao", Matchers.equalTo(
+                allVideosExpectedJsonArray[1].jsonObject["descricao"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].url", Matchers.equalTo(allVideosExpectedJsonArray[1].jsonObject["url"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].id", Matchers.equalTo(allVideosExpectedJsonArray[2].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].categoria_id", Matchers.equalTo(
+                allVideosExpectedJsonArray[2].jsonObject["categoria_id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].titulo", Matchers.equalTo(allVideosExpectedJsonArray[2].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].descricao", Matchers.equalTo(
+                allVideosExpectedJsonArray[2].jsonObject["descricao"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].url", Matchers.equalTo(allVideosExpectedJsonArray[2].jsonObject["url"]?.jsonPrimitive?.contentOrNull)))
     }
 
     @Test
     fun `should return all videos with category ID 02 when status is 200 ok`() {
         val fileResponseUri = super.getAllVideosWithCategoryId02ResponseFileUri()
         val allVideosWithCategoryId02ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
+        val allVideosWithCategoryId02ExpectedJsonArray = Json.parseToJsonElement(allVideosWithCategoryId02ExpectedResponse).jsonArray
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH)
@@ -59,7 +85,36 @@ internal class VideoControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.content().json(allVideosWithCategoryId02ExpectedResponse))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].id", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[0].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].categoria_id", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[0].jsonObject["categoria_id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].titulo", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[0].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].descricao", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[0].jsonObject["descricao"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].url", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[0].jsonObject["url"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].id", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[1].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].categoria_id", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[1].jsonObject["categoria_id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].titulo", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[1].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].descricao", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[1].jsonObject["descricao"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[1].url", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[1].jsonObject["url"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].id", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[2].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].categoria_id", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[2].jsonObject["categoria_id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].titulo", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[2].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].descricao", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[2].jsonObject["descricao"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[2].url", Matchers.equalTo(
+                allVideosWithCategoryId02ExpectedJsonArray[2].jsonObject["url"]?.jsonPrimitive?.contentOrNull)))
     }
 
     @Test
@@ -71,13 +126,14 @@ internal class VideoControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.content().json("[]"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.empty<List<Video>>()))
     }
 
     @Test
     fun `should return a video with title containing Semana 01 when the search is successful`() {
         val fileResponseUri = super.getVideoWeek01ResponseFileUri()
         val videoWeek01ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
+        val videoWeek01ExpectedJsonArray = Json.parseToJsonElement(videoWeek01ExpectedResponse).jsonArray
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/search")).queryParam("titulo", "Semana 01")
@@ -86,13 +142,21 @@ internal class VideoControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.content().json(videoWeek01ExpectedResponse))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].id", Matchers.equalTo(videoWeek01ExpectedJsonArray[0].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].categoria_id", Matchers.equalTo(
+                videoWeek01ExpectedJsonArray[0].jsonObject["categoria_id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].titulo", Matchers.equalTo(
+                videoWeek01ExpectedJsonArray[0].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].descricao", Matchers.equalTo(
+                videoWeek01ExpectedJsonArray[0].jsonObject["descricao"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].url", Matchers.equalTo(videoWeek01ExpectedJsonArray[0].jsonObject["url"]?.jsonPrimitive?.contentOrNull)))
     }
 
     @Test
     fun `should return a video with title containing Semana 02 when the search is successful`() {
         val fileResponseUri = super.getVideoWeek02ResponseFileUri()
         val videoWeek02ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
+        val videoWeek02ExpectedJsonArray = Json.parseToJsonElement(videoWeek02ExpectedResponse).jsonArray
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/search")).queryParam("titulo", "Semana 02")
@@ -101,13 +165,21 @@ internal class VideoControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.content().json(videoWeek02ExpectedResponse))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].id", Matchers.equalTo(videoWeek02ExpectedJsonArray[0].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].categoria_id", Matchers.equalTo(
+                videoWeek02ExpectedJsonArray[0].jsonObject["categoria_id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].titulo", Matchers.equalTo(
+                videoWeek02ExpectedJsonArray[0].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].descricao", Matchers.equalTo(
+                videoWeek02ExpectedJsonArray[0].jsonObject["descricao"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].url", Matchers.equalTo(videoWeek02ExpectedJsonArray[0].jsonObject["url"]?.jsonPrimitive?.contentOrNull)))
     }
 
     @Test
     fun `should return a video with title containing Semana 03 when the search is successful`() {
         val fileResponseUri = super.getVideoWeek03ResponseFileUri()
         val videoWeek03ExpectedResponse = super.readJsonContentFromFile(fileResponseUri)
+        val videoWeek03ExpectedJsonArray = Json.parseToJsonElement(videoWeek03ExpectedResponse).jsonArray
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/search")).queryParam("titulo", "Semana 03")
@@ -116,7 +188,14 @@ internal class VideoControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.content().json(videoWeek03ExpectedResponse))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].id", Matchers.equalTo(videoWeek03ExpectedJsonArray[0].jsonObject["id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].categoria_id", Matchers.equalTo(
+                videoWeek03ExpectedJsonArray[0].jsonObject["categoria_id"]?.jsonPrimitive?.contentOrNull?.toInt())))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].titulo", Matchers.equalTo(
+                videoWeek03ExpectedJsonArray[0].jsonObject["titulo"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].descricao", Matchers.equalTo(
+                videoWeek03ExpectedJsonArray[0].jsonObject["descricao"]?.jsonPrimitive?.contentOrNull)))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].url", Matchers.equalTo(videoWeek03ExpectedJsonArray[0].jsonObject["url"]?.jsonPrimitive?.contentOrNull)))
     }
 
     @Test
@@ -128,7 +207,7 @@ internal class VideoControllerTest : GeneralBeans() {
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.content().json("[]"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.empty<List<Video>>()))
     }
 
     @Test

@@ -6,18 +6,25 @@ import br.dev.s2w.alura.flix.gateway.repository.entity.VideoEntity
 import br.dev.s2w.alura.flix.gateway.repository.mapper.VideoEntityMapper.toVideo
 import br.dev.s2w.alura.flix.utility.GeneralBeans
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.eq
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.Pageable
 
 @ExtendWith(MockitoExtension::class)
 internal class FindAllVideosByTituloGatewayImplTest : GeneralBeans() {
 
     @Mock
     private lateinit var videoRepository: VideoRepository
+
+    @Mock
+    private lateinit var pageable: Pageable
 
     private lateinit var findAllVideosByTituloGateway: FindAllVideosByTituloGateway
 
@@ -36,16 +43,16 @@ internal class FindAllVideosByTituloGatewayImplTest : GeneralBeans() {
             super.buildTypeReference<List<VideoEntity>>()
         )
 
-        `when`(videoRepository.findByTituloContaining(anyString()))
-            .thenReturn(expectedRepositoryQueryResult)
+        `when`(videoRepository.findByTituloContaining(anyString(), eq(pageable)))
+            .thenReturn(PageImpl(expectedRepositoryQueryResult))
 
         val titleForQuery = "Semana"
 
         val expectedVideos = expectedRepositoryQueryResult.map { it.toVideo() }
-        val actualVideos = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery)
+        val actualVideos = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery, pageable).run { content }
 
         assertEquals(expectedVideos, actualVideos)
-        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery)
+        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery, pageable)
     }
 
     @Test
@@ -58,16 +65,16 @@ internal class FindAllVideosByTituloGatewayImplTest : GeneralBeans() {
             super.buildTypeReference<List<VideoEntity>>()
         )
 
-        `when`(videoRepository.findByTituloContaining(anyString()))
-            .thenReturn(expectedRepositoryQueryResult)
+        `when`(videoRepository.findByTituloContaining(anyString(), eq(pageable)))
+            .thenReturn(PageImpl(expectedRepositoryQueryResult))
 
         val titleForQuery = "Semana 01"
 
         val expectedVideos = expectedRepositoryQueryResult.map { it.toVideo() }
-        val actualVideos = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery)
+        val actualVideos = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery, pageable).run { content }
 
         assertEquals(expectedVideos, actualVideos)
-        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery)
+        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery, pageable)
     }
 
     @Test
@@ -80,16 +87,16 @@ internal class FindAllVideosByTituloGatewayImplTest : GeneralBeans() {
             super.buildTypeReference<List<VideoEntity>>()
         )
 
-        `when`(videoRepository.findByTituloContaining(anyString()))
-            .thenReturn(expectedRepositoryQueryResult)
+        `when`(videoRepository.findByTituloContaining(anyString(), eq(pageable)))
+            .thenReturn(PageImpl(expectedRepositoryQueryResult))
 
         val titleForQuery = "Semana 02"
 
         val expectedVideos = expectedRepositoryQueryResult.map { it.toVideo() }
-        val actualVideos = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery)
+        val actualVideos = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery, pageable).run { content }
 
         assertEquals(expectedVideos, actualVideos)
-        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery)
+        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery, pageable)
     }
 
     @Test
@@ -102,31 +109,29 @@ internal class FindAllVideosByTituloGatewayImplTest : GeneralBeans() {
             super.buildTypeReference<List<VideoEntity>>()
         )
 
-        `when`(videoRepository.findByTituloContaining(anyString()))
-            .thenReturn(expectedRepositoryQueryResult)
+        `when`(videoRepository.findByTituloContaining(anyString(), eq(pageable)))
+            .thenReturn(PageImpl(expectedRepositoryQueryResult))
 
         val titleForQuery = "Semana 03"
 
         val expectedVideos = expectedRepositoryQueryResult.map { it.toVideo() }
-        val actualVideos = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery)
+        val actualVideos = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery, pageable).run { content }
 
         assertEquals(expectedVideos, actualVideos)
-        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery)
+        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery, pageable)
     }
 
     @Test
     fun `should return an empty list when the search does not find any video with the searched title`() {
-        val expectedVideosEmptyList = listOf<VideoEntity>()
-
-        `when`(videoRepository.findByTituloContaining(anyString()))
-            .thenReturn(expectedVideosEmptyList)
+        `when`(videoRepository.findByTituloContaining(anyString(), eq(pageable)))
+            .thenReturn(PageImpl(emptyList()))
 
         val titleForQuery = "Semana 05"
 
-        val actualEmptyVideosList = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery)
+        val actualEmptyVideosList = findAllVideosByTituloGateway.fetchByTitulo(titleForQuery, pageable).run { content }
 
-        assertEquals(expectedVideosEmptyList, actualEmptyVideosList)
-        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery)
+        assertTrue(actualEmptyVideosList.isEmpty())
+        verify(videoRepository, times(1)).findByTituloContaining(titleForQuery, pageable)
     }
 
 }
