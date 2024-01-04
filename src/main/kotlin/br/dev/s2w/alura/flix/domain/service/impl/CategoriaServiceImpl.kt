@@ -3,6 +3,8 @@ package br.dev.s2w.alura.flix.domain.service.impl
 import br.dev.s2w.alura.flix.domain.gateway.categoria.*
 import br.dev.s2w.alura.flix.domain.model.Categoria
 import br.dev.s2w.alura.flix.domain.service.CategoriaService
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 
 class CategoriaServiceImpl(
     private val findAllCategoriasGateway: FindAllCategoriasGateway,
@@ -12,8 +14,8 @@ class CategoriaServiceImpl(
     private val deleteCategoriaByIdGateway: DeleteCategoriaByIdGateway
 ) : CategoriaService {
 
-    override fun retrieve(): List<Categoria> {
-        return findAllCategoriasGateway.fetch()
+    override fun retrieve(pageable: Pageable): Page<Categoria> {
+        return findAllCategoriasGateway.fetch(pageable)
     }
 
     override fun retrieveOneBy(id: Long): Categoria {

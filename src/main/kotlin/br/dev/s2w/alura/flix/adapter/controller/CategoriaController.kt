@@ -8,6 +8,9 @@ import br.dev.s2w.alura.flix.adapter.controller.response.CategoriaResponse
 import br.dev.s2w.alura.flix.domain.model.Categoria
 import br.dev.s2w.alura.flix.domain.usecase.categoria.*
 import br.dev.s2w.alura.flix.infrastructure.utility.Constants.CATEGORIA_V1_API_PATH
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -25,8 +28,9 @@ class CategoriaController(
 ) : CategoriaAPI {
 
     @GetMapping
-    override fun findAllCategorias(): List<CategoriaResponse> {
-        return findAllCategoriasUsecase.execute().map { it.toCategoriaResponse() }
+    override fun findAllCategorias(
+        @PageableDefault(size = 5) pageable: Pageable): Page<CategoriaResponse> {
+        return findAllCategoriasUsecase.execute(pageable).map { it.toCategoriaResponse() }
     }
 
     @GetMapping("/{categoriaId}")

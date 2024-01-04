@@ -3,6 +3,8 @@ package br.dev.s2w.alura.flix.domain.service.impl
 import br.dev.s2w.alura.flix.domain.gateway.video.*
 import br.dev.s2w.alura.flix.domain.model.Video
 import br.dev.s2w.alura.flix.domain.service.VideoService
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 
 class VideoServiceImpl(
     private val findAllVideosGateway: FindAllVideosGateway,
@@ -14,16 +16,16 @@ class VideoServiceImpl(
     private val deleteVideoByIdGateway: DeleteVideoByIdGateway
 ) : VideoService {
 
-    override fun retrieve(): List<Video> {
-        return findAllVideosGateway.fetch()
+    override fun retrieve(pageable: Pageable): Page<Video> {
+        return findAllVideosGateway.fetch(pageable)
     }
 
-    override fun retriveAllByCategoria(id: Long): List<Video> {
-        return findAllVideosByCategoriaGateway.fetchByCategoria(id)
+    override fun retriveAllByCategoria(id: Long, pageable: Pageable): Page<Video> {
+        return findAllVideosByCategoriaGateway.fetchByCategoria(id, pageable)
     }
 
-    override fun retriveAllByTitulo(titulo: String): List<Video> {
-        return findAllVideosByTituloGateway.fetchByTitulo(titulo)
+    override fun retriveAllByTitulo(titulo: String, pageable: Pageable): Page<Video> {
+        return findAllVideosByTituloGateway.fetchByTitulo(titulo, pageable)
     }
 
     override fun retriveOneBy(id: Long): Video {
