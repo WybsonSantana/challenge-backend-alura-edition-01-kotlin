@@ -7,6 +7,11 @@ object Constants {
     const val CATEGORIA_V1_API_PATH = "/api/v1/categorias"
     const val VIDEO_V1_API_PATH = "/api/v1/videos"
 
+    // Open API Mapping
+    const val V3_API_DOCS = "/v3/api-docs/**"
+    const val SWAGGER_UI = "/swagger-ui.html"
+    const val SWAGGER_UI_INDEX = "/swagger-ui/**"
+
     // Error Messages
     const val CATEGORIA_NOT_FOUND_EXCEPTION_MESSAGE = "Ops! Category not found!"
     const val CATEGORIA_IN_USE_EXCEPTION_MESSAGE = "Ops! This category cannot be removed because it's in use!"

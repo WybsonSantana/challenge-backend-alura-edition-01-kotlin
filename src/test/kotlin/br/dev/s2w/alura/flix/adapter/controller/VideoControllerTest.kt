@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.SpyBean
+import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
@@ -43,6 +44,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -80,6 +82,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -121,6 +124,7 @@ internal class VideoControllerTest : GeneralBeans() {
     fun `should return an empty list when the category does not contain videos or does not exist`() {
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/categoria/5"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -137,6 +141,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/search")).queryParam("titulo", "Semana 01")
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -160,6 +165,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/search")).queryParam("titulo", "Semana 02")
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -183,6 +189,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/search")).queryParam("titulo", "Semana 03")
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -202,6 +209,7 @@ internal class VideoControllerTest : GeneralBeans() {
     fun `should return an empty list when the search does not find any video with the searched title`() {
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/search")).queryParam("titulo", "Semana 04")
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -217,6 +225,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/1"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -232,6 +241,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/2"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -247,6 +257,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/3"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -266,6 +277,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.post(VIDEO_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(videoId04ExpectedRequest)
@@ -287,6 +299,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.put(VIDEO_V1_API_PATH.plus("/3"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(videoId03ExpectedUpdateRequest)
@@ -301,6 +314,7 @@ internal class VideoControllerTest : GeneralBeans() {
     fun `should delete video ID 03 when status is 204 no content`() {
         mockMvc.perform(
             MockMvcRequestBuilders.delete(VIDEO_V1_API_PATH.plus("/3"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -308,6 +322,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/3"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -320,6 +335,7 @@ internal class VideoControllerTest : GeneralBeans() {
     fun `should return status code 404 when trying to retrieve a video with a non-existent ID`() {
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/10"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -335,6 +351,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.post(VIDEO_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(blankFieldExpectedRequest)
@@ -351,6 +368,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.post(VIDEO_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(invalidUrlFieldExpectedVideoRequest)
@@ -364,6 +382,7 @@ internal class VideoControllerTest : GeneralBeans() {
     fun `should return status code 400 when trying to save a video with non-existent or invalid json`() {
         mockMvc.perform(
             MockMvcRequestBuilders.post(VIDEO_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content("{}")
@@ -380,6 +399,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.put(VIDEO_V1_API_PATH.plus("/10"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(videoId03ExpectedUpdatedResponse)
@@ -393,6 +413,7 @@ internal class VideoControllerTest : GeneralBeans() {
     fun `should return status code 404 when trying to delete a video with a non-existent ID`() {
         mockMvc.perform(
             MockMvcRequestBuilders.delete(VIDEO_V1_API_PATH.plus("/10"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -408,6 +429,7 @@ internal class VideoControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(VIDEO_V1_API_PATH.plus("/9"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )

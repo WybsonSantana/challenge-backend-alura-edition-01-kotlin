@@ -4,8 +4,20 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.util.Base64
 
 open class GeneralBeans {
+
+    private fun getUsername() = "fulanodetal@mail.com"
+
+    private fun getPassword() = "123456"
+
+    fun buildBasicAuthHeader(): String {
+        val getBase64CredentialsForAuthentication = Base64.getEncoder()
+            .encodeToString("${getUsername()}:${getPassword()}".toByteArray())
+
+        return "Basic".plus(" ").plus(getBase64CredentialsForAuthentication)
+    }
 
     fun getAllCategoriesResponseFileUri() =
         "src/test/kotlin/br/dev/s2w/alura/flix/utility/expectedCategoriesResponse/all-categories-response.json"

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.SpyBean
+import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
@@ -45,6 +46,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(CATEGORIA_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -74,6 +76,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(CATEGORIA_V1_API_PATH.plus("/1"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -89,6 +92,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(CATEGORIA_V1_API_PATH.plus("/2"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -104,6 +108,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(CATEGORIA_V1_API_PATH.plus("/3"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -123,6 +128,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.post(CATEGORIA_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(cloudCategoryExpectedRequest)
@@ -146,6 +152,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.put(CATEGORIA_V1_API_PATH.plus("/3"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(dataBaseCategoryExpectedUpdateRequest)
@@ -160,6 +167,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
     fun `should delete data base category when status is 204 no content`() {
         mockMvc.perform(
             MockMvcRequestBuilders.delete(CATEGORIA_V1_API_PATH.plus("/3"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -167,6 +175,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(CATEGORIA_V1_API_PATH.plus("/3"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -179,6 +188,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
     fun `should return status code 404 when trying to retrieve a category with a non-existent ID`() {
         mockMvc.perform(
             MockMvcRequestBuilders.get(CATEGORIA_V1_API_PATH.plus("/10"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -194,6 +204,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.post(CATEGORIA_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(blankFieldExpectedRequest)
@@ -207,6 +218,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
     fun `should return status code 400 when trying to save a category with non-existent or invalid json`() {
         mockMvc.perform(
             MockMvcRequestBuilders.post(CATEGORIA_V1_API_PATH)
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content("{}")
@@ -223,6 +235,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.put(CATEGORIA_V1_API_PATH.plus("/10"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(dataBaseExpectedRequest)
@@ -236,6 +249,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
     fun `should return status code 404 when trying to delete a category with a non-existent ID`() {
         mockMvc.perform(
             MockMvcRequestBuilders.delete(CATEGORIA_V1_API_PATH.plus("/10"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -250,6 +264,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
     fun `should return status code 422 when trying to delete a category in use`() {
         mockMvc.perform(
             MockMvcRequestBuilders.delete(CATEGORIA_V1_API_PATH.plus("/2"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
@@ -265,6 +280,7 @@ internal class CategoriaControllerTest : GeneralBeans() {
 
         mockMvc.perform(
             MockMvcRequestBuilders.get(CATEGORIA_V1_API_PATH.plus("/9"))
+                .header(HttpHeaders.AUTHORIZATION, super.buildBasicAuthHeader())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         )
